@@ -32,4 +32,3 @@ databases:
   - name: kinalapp-db
     databaseName: kinalapp
     user: kinalapp
-    type: mysql
