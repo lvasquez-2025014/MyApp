@@ -6,18 +6,22 @@ services:
     envVars:
       - key: PORT
         value: 8302
-      - key: MYSQL_URL
+      - key: DATABASE_URL
         fromDatabase:
           name: kinalapp-db
           property: connectionString
-      - key: MYSQL_USER
+      - key: DATABASE_USER
         fromDatabase:
           name: kinalapp-db
           property: user
-      - key: MYSQL_PASSWORD
+      - key: DATABASE_PASSWORD
         fromDatabase:
           name: kinalapp-db
           property: password
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: kinalapp-db
+          property: connectionString
     healthCheckPath: /login
 
   - type: redis
