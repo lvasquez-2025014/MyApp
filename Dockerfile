@@ -11,5 +11,7 @@ RUN ./mvnw clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
+COPY wait-for-db.sh .
+RUN chmod +x wait-for-db.sh
 EXPOSE 8302
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["./wait-for-db.sh"]
