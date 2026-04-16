@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: kinalapp
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 8302
+      - key: MYSQL_URL
+        fromDatabase:
+          name: kinalapp-db
+          property: connectionString
+      - key: MYSQL_USER
+        fromDatabase:
+          name: kinalapp-db
+          property: user
+      - key: MYSQL_PASSWORD
+        fromDatabase:
+          name: kinalapp-db
+          property: password
+    healthCheckPath: /login
+
+  - type: redis
+    name: kinalapp-redis
+    ipAllowList: []
+
+databases:
+  - name: kinalapp-db
+    databaseName: kinalapp
+    user: kinalapp
